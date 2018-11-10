@@ -1,6 +1,5 @@
 package uk.antiperson.stackspawner.listeners;
 
-import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,7 @@ public class BlockBreak implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onSpawnerBreak(BlockBreakEvent event){
-        if(event.getBlock().getType() == Material.SPAWNER){
+        if(event.getBlock().getState() instanceof CreatureSpawner){
             CreatureSpawner creatureSpawner = (CreatureSpawner) event.getBlock().getState();
             if(!SpawnerStorage.isStackedSpawner(creatureSpawner)){
                 return;
@@ -36,7 +35,7 @@ public class BlockBreak implements Listener {
                 }else{
                     SpawnerStorage.removeStatus(creatureSpawner);
                 }
-                
+
                 if(ss.config.getConfig().getInt("tag.remove-at") == newSize){
                     as.remove();
                 }
