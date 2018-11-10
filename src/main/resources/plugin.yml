@@ -1,0 +1,12 @@
+name: StackSpawner
+main: uk.antiperson.stackspawner.StackSpawner
+version: 1.0
+api-version: 1.13
+website: (website goes here)
+permissions:
+  stackspawner.commands:
+    description: Access to plugin commands.
+commands:
+  ss:
+    permission: stackspawner.commands
+    description: The main command.

@@ -1,0 +1,17 @@
+# StackSpawner config by antiPerson
+
+tag:
+  # The formatting of the tag.
+  # Placeholders:
+  # %size% - Stack size.
+  # %type% - Formatted type name.
+  # Normal Minecraft color codes are also supported, by using '&' before the letter/number.
+  format: '&a%size%x &b%type%'
+  # At which value should the stack tag be removed at.
+  remove-at: 1
+
+# The area around a newly placed spawner which should be checked for other spawners.
+search-radius: 5
+
+# The maximum size of a spawner stack.
+max-size: 20
