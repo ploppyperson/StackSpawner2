@@ -1,5 +1,6 @@
 package uk.antiperson.stackspawner.listeners;
 
+import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
@@ -25,12 +26,12 @@ public class BlockPlace implements Listener {
             CreatureSpawner nearbySpawner = ss.tools.getNearbySpawner(placedSpawner, searchRadius);
 
             if(nearbySpawner != null){
+                event.getBlock().setType(Material.AIR);
                 int newValue = SpawnerStorage.getSize(nearbySpawner) + 1;
                 SpawnerStorage.setSize(nearbySpawner, newValue);
 
                 ArmorStand as = SpawnerTools.getArmorStand(nearbySpawner.getLocation());
                 ss.tools.updateTag(nearbySpawner, as);
-                event.setCancelled(true);
             }
         }
     }
