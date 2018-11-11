@@ -33,7 +33,7 @@ public class SpawnerStorage {
     }
 
     public static void removeStatus(CreatureSpawner spawner){
-        spawnerSize.remove(spawner.getLocation().toString());
+        spawnerSize.remove(locToString(spawner.getLocation()));
     }
 
     public void load(){
