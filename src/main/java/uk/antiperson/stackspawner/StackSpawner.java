@@ -35,6 +35,6 @@ public class StackSpawner extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new BlockBreak(this), this);
         getServer().getPluginManager().registerEvents(new BlockPlace(this), this);
         getServer().getPluginManager().registerEvents(new SpawnerSpawn(this), this);
-        getCommand("ss").setExecutor(new Commands(this));
+        getCommand("stackspawner").setExecutor(new Commands(this));
     }
 }
