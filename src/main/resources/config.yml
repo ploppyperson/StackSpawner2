@@ -5,6 +5,7 @@ tag:
   # Placeholders:
   # %size% - Stack size.
   # %type% - Formatted type name.
+  # %bukkit_type% - Unformatted bukkit type name.
   # Normal Minecraft color codes are also supported, by using '&' before the letter/number.
   format: '&a%size%x &b%type%'
   # At which value should the stack tag be removed at.
