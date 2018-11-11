@@ -1,12 +1,12 @@
 name: StackSpawner
 main: uk.antiperson.stackspawner.StackSpawner
-version: 1.0
-api-version: 1.13
-website: (website goes here)
+version: 1.0.1
+website: https://www.spigotmc.org/resources/stackspawner.62284/
 permissions:
   stackspawner.commands:
     description: Access to plugin commands.
 commands:
-  ss:
+  stackspawner:
     permission: stackspawner.commands
     description: The main command.
+    aliases: [ss]
