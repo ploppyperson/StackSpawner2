@@ -2,14 +2,13 @@ package uk.antiperson.stackspawner.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import uk.antiperson.stackspawner.SpawnerStorage;
 import uk.antiperson.stackspawner.SpawnerTools;
 import uk.antiperson.stackspawner.StackSpawner;
+import uk.antiperson.stackspawner.StackedSpawner;
 
 public class BlockPlace implements Listener {
 
@@ -24,14 +23,14 @@ public class BlockPlace implements Listener {
             int searchRadius = ss.config.getConfig().getInt("search-radius");
             CreatureSpawner placedSpawner = (CreatureSpawner) event.getBlock().getState();
             CreatureSpawner nearbySpawner = ss.tools.getNearbySpawner(placedSpawner, searchRadius);
+            if(nearbySpawner == null){
+                return;
+            }
 
-            if(nearbySpawner != null){
-                event.getBlock().setType(Material.AIR);
-                int newValue = SpawnerStorage.getSize(nearbySpawner) + 1;
-                SpawnerStorage.setSize(nearbySpawner, newValue);
-
-                ArmorStand as = SpawnerTools.getArmorStand(nearbySpawner.getLocation());
-                ss.tools.updateTag(nearbySpawner, as);
+            StackedSpawner stackedSpawner = SpawnerTools.getStackedSpawner(ss, nearbySpawner);
+            if(stackedSpawner != null){
+                ss.getServer().getScheduler().runTask(ss, () -> event.getBlock().setType(Material.AIR));
+                stackedSpawner.setSize(stackedSpawner.getSize() + 1);
             }
         }
     }

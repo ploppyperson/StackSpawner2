@@ -54,6 +54,12 @@ public class SpawnerTools {
                 return (ArmorStand) entity;
             }
         }
+        return null;
+    }
+
+    public static ArmorStand spawnStand(Location location){
+        location.setX(location.getBlockX() + 0.5);
+        location.setZ(location.getBlockZ() + 0.5);
         ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setSmall(true);
         armorStand.setGravity(false);
@@ -61,13 +67,20 @@ public class SpawnerTools {
         return armorStand;
     }
 
-    public void updateTag(CreatureSpawner spawner, ArmorStand armorStand){
+    public void updateTag(StackedSpawner spawner){
         String original = ss.config.getConfig().getString("tag.format");
-        String replace1 = original.replace("%size%", SpawnerStorage.getSize(spawner) + "");
-        String replace2 = replace1.replace("%type%", WordUtils.capitalizeFully(spawner.getSpawnedType().toString()));
-        String replace3 = replace2.replace("%bukkit_type%", spawner.getSpawnedType().toString());
+        String replace1 = original.replace("%size%", spawner.getSize() + "");
+        String replace2 = replace1.replace("%type%", WordUtils.capitalizeFully(spawner.getSpawner().getSpawnedType().toString()));
+        String replace3 = replace2.replace("%bukkit_type%", spawner.getSpawner().getSpawnedType().toString());
         String replace4 = ChatColor.translateAlternateColorCodes('&', replace3);
-        armorStand.setCustomName(replace4);
-        armorStand.setCustomNameVisible(true);
+        spawner.getArmorStand().setCustomName(replace4);
+        spawner.getArmorStand().setCustomNameVisible(true);
+    }
+
+    public static StackedSpawner getStackedSpawner(StackSpawner ss, CreatureSpawner spawner){
+        if(SpawnerStorage.isStackedSpawner(spawner)){
+            return new StackedSpawner(ss, spawner);
+        }
+        return null;
     }
 }
