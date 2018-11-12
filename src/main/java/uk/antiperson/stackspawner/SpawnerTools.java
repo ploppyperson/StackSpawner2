@@ -70,7 +70,8 @@ public class SpawnerTools {
     public void updateTag(StackedSpawner spawner){
         String original = ss.config.getConfig().getString("tag.format");
         String replace1 = original.replace("%size%", spawner.getSize() + "");
-        String replace2 = replace1.replace("%type%", WordUtils.capitalizeFully(spawner.getSpawner().getSpawnedType().toString()));
+        String formattedType = WordUtils.capitalizeFully(spawner.getSpawner().getSpawnedType().toString().replaceAll("[\\\\W]|_", " "));
+        String replace2 = replace1.replace("%type%", formattedType);
         String replace3 = replace2.replace("%bukkit_type%", spawner.getSpawner().getSpawnedType().toString());
         String replace4 = ChatColor.translateAlternateColorCodes('&', replace3);
         spawner.getArmorStand().setCustomName(replace4);
@@ -83,4 +84,6 @@ public class SpawnerTools {
         }
         return null;
     }
+
+
 }
