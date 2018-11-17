@@ -36,6 +36,10 @@ public class SpawnerStorage {
         spawnerSize.remove(locToString(spawner.getLocation()));
     }
 
+    public static void putDirectly(String loc, int size){
+        spawnerSize.put(loc, size);
+    }
+
     public void load(){
         for(String a : fileConfiguration.getKeys(false)){
             spawnerSize.put(a, fileConfiguration.getInt(a));

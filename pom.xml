@@ -6,7 +6,7 @@
 
     <groupId>uk.antiperson.stackspawner</groupId>
     <artifactId>StackSpawner</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
 
 
     <build>
@@ -102,6 +102,13 @@
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
             <version>6.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.antiperson.stackmob</groupId>
+            <artifactId>stackmob</artifactId>
+            <version>3.1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/jars/StackMob-3.1.0.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
