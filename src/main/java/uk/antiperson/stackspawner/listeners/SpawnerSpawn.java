@@ -1,14 +1,12 @@
 package uk.antiperson.stackspawner.listeners;
 
-import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.SpawnerSpawnEvent;
 import uk.antiperson.stackspawner.SpawnerTools;
+import uk.antiperson.stackspawner.StackMobSupport;
 import uk.antiperson.stackspawner.StackSpawner;
 import uk.antiperson.stackspawner.StackedSpawner;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class SpawnerSpawn implements Listener {
 
@@ -24,13 +22,12 @@ public class SpawnerSpawn implements Listener {
             return;
         }
         if(stackedSpawner.getSize() > 1){
+            if(StackMobSupport.isEnabled()){
+                StackMobSupport.spawnEntities(event.getEntity(), stackedSpawner);
+                return;
+            }
             for(int i = 0;  i < stackedSpawner.getSize(); i++){
-                int randX = ThreadLocalRandom.current().nextInt(-5,5);
-                int randZ = ThreadLocalRandom.current().nextInt(-5,5);
-                Location loc =  event.getSpawner().getLocation().add(randX + 0.5, 0, randZ + 0.5);
-                if(loc.getBlock().isEmpty()){
-                    event.getSpawner().getWorld().spawnEntity(loc, event.getEntityType());
-                }else{
+                if(SpawnerTools.attemptSpawn(event.getSpawner().getLocation(), event.getEntityType()) == null){
                     i = i - 1;
                 }
             }

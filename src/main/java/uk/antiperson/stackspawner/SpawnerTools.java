@@ -1,6 +1,7 @@
 package uk.antiperson.stackspawner;
 
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -8,6 +9,9 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SpawnerTools {
 
@@ -83,6 +87,21 @@ public class SpawnerTools {
             return new StackedSpawner(ss, spawner);
         }
         return null;
+    }
+
+    public static Entity attemptSpawn(Location spawner, EntityType type){
+        int randX = ThreadLocalRandom.current().nextInt(-5,5);
+        int randZ = ThreadLocalRandom.current().nextInt(-5,5);
+        Location loc =  spawner.add(randX + 0.5, 0, randZ + 0.5);
+        if(loc.getBlock().isEmpty()){
+            LivingEntity livingEntity = (LivingEntity) spawner.getWorld().spawnEntity(loc, type);
+            if(Bukkit.spigot().getConfig().getBoolean("world-settings.nerf-spawner-mobs")){
+                livingEntity.setAI(false);
+            }
+            return livingEntity;
+        }else{
+            return null;
+        }
     }
 
 
