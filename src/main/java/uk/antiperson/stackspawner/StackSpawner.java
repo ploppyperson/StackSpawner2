@@ -1,5 +1,6 @@
 package uk.antiperson.stackspawner;
 
+import org.bstats.bukkit.MetricsLite;
 import org.bukkit.plugin.java.JavaPlugin;
 import uk.antiperson.stackspawner.listeners.BlockBreak;
 import uk.antiperson.stackspawner.listeners.BlockPlace;
@@ -22,6 +23,7 @@ public class StackSpawner extends JavaPlugin{
 
         getLogger().info("Registering listeners, tasks and commands...");
         registerEvents();
+        new MetricsLite(this);
     }
 
     @Override

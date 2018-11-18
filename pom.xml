@@ -6,7 +6,7 @@
 
     <groupId>uk.antiperson.stackspawner</groupId>
     <artifactId>StackSpawner</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
 
 
     <build>
@@ -45,16 +45,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.1.0</version>
+                <!-- Do not include the <configuration>...</configuration> part if you are using Sponge! -->
                 <configuration>
-                    <artifactSet>
-                        <includes>
-                            <include>org.bstats:*</include>
-                        </includes>
-                    </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
+                            <!-- Replace this with your package! -->
                             <shadedPattern>uk.antiperson.stackspawner</shadedPattern>
                         </relocation>
                     </relocations>
@@ -77,8 +74,8 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>bstats-repo</id>
-            <url>http://repo.bstats.org/content/repositories/releases/</url>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
         </repository>
         <repository>
             <id>sk89q-repo</id>
@@ -97,11 +94,13 @@
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-legacy</artifactId>
             <version>6.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
             <version>6.0.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>uk.antiperson.stackmob</groupId>
@@ -109,6 +108,12 @@
             <version>3.1.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/jars/StackMob-3.1.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit-lite</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
