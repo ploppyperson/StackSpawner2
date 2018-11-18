@@ -14,7 +14,7 @@ public class StackMobSupport {
     }
 
     public static void spawnEntities(Entity original, StackedSpawner spawner){
-        int maxSize = getEntityManager().getStackedEntity(original).getMaxStackSize();
+        int maxSize = getMaxSize(original);
         double a = (double) spawner.getSize() / (double) maxSize;
         int floor = (int) Math.floor(a);
         int leftOver = (int) Math.round((a - floor) * maxSize);
@@ -33,7 +33,15 @@ public class StackMobSupport {
         return getStackMob() != null && getStackMob().isEnabled();
     }
 
-    public static EntityManager getEntityManager(){
+    private static EntityManager getEntityManager(){
         return new EntityManager(getStackMob());
+    }
+
+    private static int getMaxSize(Entity entity){
+        int maxStackSize = getStackMob().getCustomConfig().getInt("stack-max");
+        if (getStackMob().getCustomConfig().isInt("custom." + entity.getType() + ".stack-max")) {
+            maxStackSize =  getStackMob().getCustomConfig().getInt("custom." + entity.getType() + ".stack-max");
+        }
+        return maxStackSize;
     }
 }
