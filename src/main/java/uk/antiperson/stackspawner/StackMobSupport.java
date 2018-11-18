@@ -18,7 +18,7 @@ public class StackMobSupport {
         double a = (double) spawner.getSize() / (double) maxSize;
         int floor = (int) Math.floor(a);
         int leftOver = (int) Math.round((a - floor) * maxSize);
-        for(int i = 0; i <= floor; i++){
+        for(int i = 0; i < floor; i++){
             Entity entity = SpawnerTools.attemptSpawn(spawner.getLocation(), original.getType());
             if(entity == null){
                 i = i - 1;
@@ -38,9 +38,9 @@ public class StackMobSupport {
     }
 
     private static int getMaxSize(Entity entity){
-        int maxStackSize = getStackMob().getCustomConfig().getInt("stack-max");
-        if (getStackMob().getCustomConfig().isInt("custom." + entity.getType() + ".stack-max")) {
-            maxStackSize =  getStackMob().getCustomConfig().getInt("custom." + entity.getType() + ".stack-max");
+        int maxStackSize = getStackMob().config.getCustomConfig().getInt("stack-max");
+        if (getStackMob().config.getCustomConfig().isInt("custom." + entity.getType() + ".stack-max")) {
+            maxStackSize =  getStackMob().config.getCustomConfig().getInt("custom." + entity.getType() + ".stack-max");
         }
         return maxStackSize;
     }
